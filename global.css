@@ -23,6 +23,17 @@ body {
   overflow-x: hidden;
 }
 
+.flex {
+  display: flex;
+}
+.space-between {
+  justify-content: space-between;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
 .section-title {
   font-size: 34px;
   font-weight: 700;
