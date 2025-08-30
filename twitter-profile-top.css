@@ -1,4 +1,4 @@
-.twitter-profile-top-section {
+.twitter-proile-top-section {
   background: linear-gradient(#f4effe, transparent);
   padding: 0 0 50px 0;
   margin: 50px 0;
@@ -7,6 +7,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  padding-bottom: 50px;
 }
 .twitter-profile-top-testimonial-column {
   display: flex;
@@ -27,6 +28,7 @@
   border-radius: 999px;
   width: 60px;
   height: 60px;
+  object-fit: cover;
 }
 .twitter-profile-top-name {
   font-weight: 600;
