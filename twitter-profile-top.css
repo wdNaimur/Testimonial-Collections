@@ -1,0 +1,112 @@
+.twitter-proile-top-section {
+  background: linear-gradient(#f4effe, transparent);
+  padding: 0 0 50px 0;
+  margin: 50px 0;
+}
+.twitter-profile-top-testimonial-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-bottom: 50px;
+}
+.twitter-profile-top-testimonial-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.twiter-profile-top-box {
+  padding: 20px 25px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 480px;
+}
+.twitter-profile-top-avatar {
+  border-radius: 999px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+.twitter-profile-top-name {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.verified-badge {
+  color: #19c3e9;
+  width: 20px;
+  height: 20px;
+}
+.twitter-profile-top-username {
+  color: gray;
+  font-size: 14px;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+.twitter-profile-top-header {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.twitter-profile-top-user-info-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.twitter-profile-top-role {
+  text-transform: uppercase;
+  opacity: 80%;
+  letter-spacing: 0.8px;
+  color: var(--color-text);
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-text-opacity-60);
+  border-radius: 999px;
+  cursor: default;
+}
+.twitter-profile-top-description {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.twitter-profile-arrow-icon-right {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 999px;
+  transition: background-color 0.3s ease;
+}
+.twitter-profile-top-link,
+.twitter-profile-top-date {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  text-decoration: none;
+  color: gray;
+  font-size: 13px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.twitter-profile-top-link:hover {
+  color: #19c3e9;
+  .twitter-profile-arrow-icon-right {
+    color: #19c3e9;
+  }
+}
+
+.twitter-profile-top-footer {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  justify-content: space-between;
+}
