@@ -1,4 +1,10 @@
 :root {
+  --color-bg: #fff;
+  --color-text: #0d251d;
+}
+
+/* Need to get rid of this colors of global.css */
+:root {
   /* === Color Variables === */
   --color-bg: #fff;
   --color-card-bg: #f8f9f2;

@@ -1,4 +1,31 @@
+.horizontal-flex-box-test {
+  height: 100vh;
+  width: 100vw;
+  columns: 3;
+  column-gap: 10px;
+}
 
-
-
-
+.big {
+  width: 100px;
+  height: 500px;
+  background-color: brown;
+  margin-bottom: 10px;
+  display: block;
+  break-inside: avoid;
+}
+.small {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  margin-bottom: 10px;
+  display: block;
+  break-inside: avoid;
+}
+.medium {
+  width: 100px;
+  height: 450px;
+  background-color: bisque;
+  margin-bottom: 10px;
+  display: block;
+  break-inside: avoid;
+}

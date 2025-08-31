@@ -1,8 +1,22 @@
 /* minimal card carousel design  */
+:root {
+  --color-card-bg: #f8f9f2;
+  --color-hover-bg: rgba(13, 37, 29, 0.1);
+  --color-text: #0d251d;
+  --color-text-opacity-80: rgba(13, 37, 29, 0.8);
+  --color-text-opacity-60: rgba(13, 37, 29, 0.6);
+}
+
+.minimal-card-carousel-container {
+  max-width: 1536px;
+  margin: 0 auto;
+}
 .carousel {
   display: flex;
+  /* padding: 0 10px; */
   gap: 20px;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 .testimonial-card {
@@ -97,4 +111,13 @@
 }
 .arrow-button:hover {
   background-color: var(--color-hover-bg);
+}
+
+@media (max-width: 640px) {
+  .testimonial-card {
+    flex: 1 0 95%;
+  }
+  .minimal-card-carousel-container {
+    padding: 10px auto;
+  }
 }

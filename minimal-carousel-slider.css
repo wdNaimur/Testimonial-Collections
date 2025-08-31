@@ -1,5 +1,12 @@
-/* minimal-carousel-slider-Testimonial */
+:root {
+  --color-minimal-carousel-text: #5f5b84;
+  --color-minimal-carousel-bg: #fafafe;
+  --color-minimal-carousel-shadow: rgba(95, 91, 132, 0.1);
+  --color-minimal-carousel-button-bg: #fccffe;
+  --color-minimal-carousel-button-hover-bg: #f0b3e0;
+}
 
+/* minimal-carousel-slider-Testimonial */
 .minimal-carousel-slider-image {
   border-radius: 999px;
   height: 150px;
