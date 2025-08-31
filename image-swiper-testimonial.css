@@ -6,14 +6,12 @@
 .image-swiper-testimonial-container {
   margin: 0 auto;
   padding: 4rem 1.5rem;
+  position: relative;
 }
 
-.image-swiper-testimonial-text-center {
-  text-align: center;
-}
 .image-swiper-testimonial-top-section {
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -21,12 +19,15 @@
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
+  width: 150px;
 }
 
 .image-swiper-testimonial-top-section h2 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 0.5rem;
+  flex: 1 0 800px;
+  text-align: center;
 }
 
 .image-swiper-testimonial-arrows {
@@ -37,10 +38,10 @@
 }
 
 .image-swiper-testimonial-arrow-btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.5rem;
+  height: 2rem;
   border: 1px solid white;
-  border-radius: 50%;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,40 +56,33 @@
 }
 
 .image-swiper-testimonial-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
   margin-top: 4rem;
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .image-swiper-testimonial-content {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .image-swiper-testimonial-main {
   display: flex;
   gap: 1.5rem;
-  align-items: flex-start;
+  align-items: center;
+  max-width: 700px;
 }
 
 .image-swiper-testimonial-main img {
-  width: 7rem;
-  height: 7rem;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   border-radius: 0.5rem;
 }
 
 .image-swiper-testimonial-main h3 {
-  font-size: 1.125rem;
+  font-size: 25px;
   font-weight: 600;
 }
 
 .image-swiper-testimonial-main p {
   margin-top: 0.5rem;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .image-swiper-testimonial-main .image-swiper-testimonial-author {
@@ -100,7 +94,7 @@
 .image-swiper-testimonial-faces {
   display: flex;
   position: absolute;
-  right: 40rem;
+  left: 800px;
   gap: 1rem;
   padding-bottom: 0.5rem;
   bottom: 55px;
@@ -123,4 +117,49 @@
 .image-swiper-testimonial-faces {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media (max-width: 1280px) {
+  .image-swiper-testimonial-top-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .image-swiper-testimonial-arrows {
+    position: absolute;
+    bottom: 50px;
+  }
+  .image-swiper-testimonial-top-section p {
+    width: auto;
+  }
+  .image-swiper-testimonial-top-section h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    flex: 1 0 auto;
+    text-align: center;
+  }
+  .image-swiper-testimonial-container {
+    padding-bottom: 150px;
+  }
+  .image-swiper-testimonial-faces {
+    bottom: 105px;
+  }
+}
+@media (max-width: 1024px) {
+  .image-swiper-testimonial-faces {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .image-swiper-testimonial-main {
+    flex-direction: column;
+    text-align: center;
+  }
+  .image-swiper-testimonial-main img {
+    width: 100%;
+    height: auto;
+  }
+  .image-swiper-testimonial-main h3 {
+    font-size: 1.25rem;
+  }
 }
