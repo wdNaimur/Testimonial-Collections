@@ -4,6 +4,18 @@
 }
 
 /* Need to get rid of this colors of global.css */
+:root {
+  /* === Color Variables === */
+  --color-bg: #fff;
+  --color-card-bg: #f8f9f2;
+  --color-text: #0d251d;
+  --color-hover-bg: rgba(13, 37, 29, 0.1);
+  --color-text-opacity-80: rgba(13, 37, 29, 0.8);
+  --color-text-opacity-60: rgba(13, 37, 29, 0.6);
+  --color-background-dark: #0d0d0d;
+  --color-minimal-carousel-button-bg: #fccffe;
+  --color-minimal-carousel-button-hover-bg: #f0b3e0;
+}
 
 * {
   box-sizing: border-box;
