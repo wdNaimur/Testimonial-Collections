@@ -13,12 +13,11 @@
 }
 .carousel {
   display: flex;
-
   gap: 20px;
   justify-content: center;
   /* for 1 directional cards  */
   /* overflow-x: hidden; */
-  /* padding: 0 10px; */
+  padding: 0 10px;
   flex-wrap: wrap;
 }
 
@@ -128,3 +127,9 @@
     padding: 10px auto;
   }
 } */
+
+@media (max-width: 640px) {
+  .testimonial-card {
+    flex: 1 0 100%;
+  }
+}
