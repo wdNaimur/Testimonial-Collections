@@ -1,4 +1,10 @@
 :root {
+  --color-bg: #fff;
+  --color-text: #0d251d;
+}
+
+/* Need to get rid of this colors of global.css */
+:root {
   /* === Color Variables === */
   --color-bg: #fff;
   --color-card-bg: #f8f9f2;
@@ -33,15 +39,13 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 .section-title {
-  font-size: 34px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--color-text);
   padding: 30px;
   text-align: center;
 }
-
 .container {
   width: 100%;
   max-width: 1536px;
@@ -54,24 +58,59 @@ body {
   .container {
     max-width: 640px;
   }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 30px;
+    text-align: center;
+  }
 }
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 30px;
+    text-align: center;
   }
 }
 @media (min-width: 1024px) {
   .container {
     max-width: 1024px;
   }
+  .section-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 30px;
+    text-align: center;
+  }
 }
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px;
   }
+  .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 30px;
+    text-align: center;
+  }
 }
 @media (min-width: 1536px) {
   .container {
     max-width: 1536px;
+  }
+  .section-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 30px;
+    text-align: center;
   }
 }

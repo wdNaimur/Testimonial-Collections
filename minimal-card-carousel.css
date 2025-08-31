@@ -1,8 +1,24 @@
 /* minimal card carousel design  */
+:root {
+  --color-card-bg: #f8f9f2;
+  --color-hover-bg: rgba(13, 37, 29, 0.1);
+  --color-text: #0d251d;
+  --color-text-opacity-80: rgba(13, 37, 29, 0.8);
+  --color-text-opacity-60: rgba(13, 37, 29, 0.6);
+}
+
+.minimal-card-carousel-container {
+  max-width: 1536px;
+  margin: 0 auto;
+}
 .carousel {
   display: flex;
   gap: 20px;
   justify-content: center;
+  /* for 1 directional cards  */
+  /* overflow-x: hidden; */
+  padding: 0 10px;
+  flex-wrap: wrap;
 }
 
 .testimonial-card {
@@ -67,6 +83,9 @@
   padding: 4px;
   border-radius: 999px;
   transition: background-color 0.3s ease;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
 }
 .arrow-icon:hover {
   color: var(--color-text);
@@ -97,4 +116,20 @@
 }
 .arrow-button:hover {
   background-color: var(--color-hover-bg);
+}
+
+/* for 1 directional cards  */
+/* @media (max-width: 640px) {
+  .testimonial-card {
+    flex: 1 0 95%;
+  }
+  .minimal-card-carousel-container {
+    padding: 10px auto;
+  }
+} */
+
+@media (max-width: 640px) {
+  .testimonial-card {
+    flex: 1 0 100%;
+  }
 }
