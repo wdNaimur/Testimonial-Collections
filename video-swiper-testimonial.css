@@ -25,7 +25,6 @@
   z-index: 100;
 }
 .video-swiper-testimonial-top {
-  background-image: url("https://img.youtube.com/vi/W9K9r0Z-8_c/maxresdefault.jpg");
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -34,6 +33,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.video-swiper-background-1 {
+  background-image: url("https://img.youtube.com/vi/iZk-QKV44u0/maxresdefault.jpg");
+}
+.video-swiper-background-2 {
+  background-image: url("https://img.youtube.com/vi/cwjsoOZVK34/maxresdefault.jpg");
+}
+.video-swiper-background-3 {
+  background-image: url("https://img.youtube.com/vi/44FTAS-qT8Q/maxresdefault.jpg");
 }
 .video-swiper-image-paper-cut {
   position: absolute;
@@ -162,10 +171,10 @@
 /* animations  */
 /* Entry Animations */
 .fade-in-slide-up {
-  animation: fadeInSlideUp 0.5s ease-in forwards;
+  animation: fadeInSlideUp 0.5s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 .fade-in-slide-up-slow {
-  animation: fadeInSlideUp 1s ease-in forwards;
+  animation: fadeInSlideUp 1s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 .video-swiper-testimonial-right-heading {
   font-size: 45px;
@@ -189,7 +198,7 @@
 
 /* Exit Animations */
 .fade-out-slide-Down {
-  animation: fadeOutSlideDown 0.6s ease-out forwards;
+  animation: fadeOutSlideDown 0.6s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 @keyframes fadeOutSlideDown {
   0% {
@@ -203,7 +212,7 @@
 }
 
 .zoom-in {
-  animation: zoomIn 1s ease-out forwards;
+  animation: zoomIn 1s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 @keyframes zoomIn {
   from {
