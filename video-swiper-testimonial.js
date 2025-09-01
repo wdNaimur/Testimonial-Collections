@@ -131,11 +131,15 @@ videoNextButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (isVideoPlaying) return; // ✅ ignore if video is playing
     startAutoplay();
-    triggerExitAnimations();
-    setTimeout(() => {
-      currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-      updateVideoDisplay();
-    }, 600);
+    currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
+    updateVideoDisplay();
+    //     triggerExitAnimations();
+    //     setTimeout(() => {
+    //       currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
+    //       updateVideoDisplay();
+    //     },
+    //     600
+    // );
   });
 });
 
@@ -144,12 +148,18 @@ videoPrevButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (isVideoPlaying) return; // ✅ ignore if video is playing
     startAutoplay();
-    triggerExitAnimations();
-    setTimeout(() => {
-      currentVideoIndex =
-        (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
-      updateVideoDisplay();
-    }, 600);
+    // triggerExitAnimations();
+    currentVideoIndex =
+      (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
+    updateVideoDisplay();
+    // setTimeout(
+    //   () => {
+    //     // currentVideoIndex =
+    //     //   (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
+    //     // updateVideoDisplay();
+    //   }
+    //   // 600
+    // );
   });
 });
 
