@@ -1,178 +1,163 @@
-const allVideoTestimonial = document.querySelector(
+// ====================================================
+// Vertical Video Swiper
+// ====================================================
+const allVideoTestimonialVertical = document.querySelector(
   ".all-video-swiper-container"
 );
-const videoNextButtons = document.querySelectorAll(
+const videoNextButtonsVertical = document.querySelectorAll(
   ".video-swiper-right-button"
 );
-const videoPrevButtons = document.querySelectorAll(".video-swiper-left-button");
-const allVideoArray = [...allVideoTestimonial.children];
+const videoPrevButtonsVertical = document.querySelectorAll(
+  ".video-swiper-left-button"
+);
+const allVideoArrayVertical = [...allVideoTestimonialVertical.children];
 
-const quoteEl = document.querySelector(".video-swiper-testimonial-quote");
-const authorBoxEl = document.querySelector(".video-swiper-author-box");
-const topSection = document.querySelector(".video-swiper-testimonial-top");
+let currentVideoIndexVertical = 0;
+let autoplayIntervalVertical;
+let isVideoPlayingVertical = false;
 
-let currentVideoIndex = 0;
-let autoplayInterval;
-let isVideoPlaying = false; // ✅ New flag
+function resetAndTriggerAnimationsVertical(currentSlide) {
+  const quoteEl = currentSlide.querySelector(".video-swiper-testimonial-quote");
+  const authorBoxEl = currentSlide.querySelector(".video-swiper-author-box");
+  const topSection = currentSlide.querySelector(
+    ".video-swiper-testimonial-top"
+  );
 
-// Function to reset and trigger entry animations
-function resetAndTriggerAnimations() {
-  quoteEl.classList.remove("fade-out-slide-up");
-  authorBoxEl.classList.remove("fade-out-slide-up-slow");
-  topSection.classList.remove("zoom-out");
-
+  quoteEl.classList.remove("fade-out-slide-down");
   void quoteEl.offsetWidth;
-  void authorBoxEl.offsetWidth;
-  void topSection.offsetWidth;
-
   quoteEl.classList.add("fade-in-slide-up");
+
+  authorBoxEl.classList.remove("fade-out-slide-down");
+  void authorBoxEl.offsetWidth;
   authorBoxEl.classList.add("fade-in-slide-up-slow");
+
+  topSection.classList.remove("zoom-out");
+  void topSection.offsetWidth;
   topSection.classList.add("zoom-in");
 }
 
-// Function to trigger exit animations
-function triggerExitAnimations() {
-  quoteEl.classList.remove("fade-in-slide-up");
-  authorBoxEl.classList.remove("fade-in-slide-up-slow");
+function triggerExitAnimationsVertical(currentSlide) {
+  const quoteEl = currentSlide.querySelector(".video-swiper-testimonial-quote");
+  const authorBoxEl = currentSlide.querySelector(".video-swiper-author-box");
+  const topSection = currentSlide.querySelector(
+    ".video-swiper-testimonial-top"
+  );
 
-  quoteEl.classList.add("fade-out-slide-up");
-  authorBoxEl.classList.add("fade-out-slide-up-slow");
+  quoteEl.classList.remove("fade-in-slide-up");
+  quoteEl.classList.add("fade-out-slide-down");
+
+  authorBoxEl.classList.remove("fade-in-slide-up-slow");
+  authorBoxEl.classList.add("fade-out-slide-down");
+
+  topSection.classList.remove("zoom-in");
+  topSection.classList.add("zoom-out");
 }
 
-// New function to handle the play button and close button logic for the active slide
-function attachPlayButtonListener() {
-  const currentSlide = allVideoArray[currentVideoIndex];
+function attachPlayButtonListenerVertical(currentSlide) {
   const playButton = currentSlide.querySelector(".swiper-play-button");
   const closeButton = currentSlide.querySelector(".swiper-close-button");
   const videoIframe = currentSlide.querySelector(
     ".video-swiper-testimonial-video"
   );
 
-  // Reset all video iframes
-  allVideoArray.forEach((slide) => {
-    const iframe = slide.querySelector(".video-swiper-testimonial-video");
-    const playBtn = slide.querySelector(".swiper-play-button");
-    const closeBtn = slide.querySelector(".swiper-close-button");
+  allVideoArrayVertical.forEach((slide, idx) => {
+    if (idx !== currentVideoIndexVertical) {
+      const iframe = slide.querySelector(".video-swiper-testimonial-video");
+      const playBtn = slide.querySelector(".swiper-play-button");
+      const closeBtn = slide.querySelector(".swiper-close-button");
 
-    iframe.src = iframe.src.replace("&autoplay=1", "");
-    iframe.style.display = "none";
-    playBtn.style.display = "flex";
-    if (closeBtn) {
-      closeBtn.style.display = "none";
+      iframe.src = iframe.src.replace("&autoplay=1", "");
+      iframe.style.display = "none";
+      playBtn.style.display = "flex";
+      if (closeBtn) closeBtn.style.display = "none";
     }
   });
 
-  // Play button listener
   if (playButton && videoIframe) {
-    const playListener = () => {
-      clearInterval(autoplayInterval);
-      isVideoPlaying = true; // ✅ stop autoplay when video plays
+    playButton.onclick = () => {
+      clearInterval(autoplayIntervalVertical);
+      isVideoPlayingVertical = true;
       videoIframe.style.display = "block";
       videoIframe.src += "&autoplay=1";
       playButton.style.display = "none";
-      if (closeButton) {
-        closeButton.style.display = "flex";
-      }
+      if (closeButton) closeButton.style.display = "flex";
     };
-    playButton.onclick = null;
-    playButton.onclick = playListener;
   }
 
-  // Close button listener
   if (closeButton && videoIframe) {
-    const closeListener = () => {
-      const videoSrc = videoIframe.src;
-      videoIframe.src = videoSrc.replace("&autoplay=1", "");
+    closeButton.onclick = () => {
+      videoIframe.src = videoIframe.src.replace("&autoplay=1", "");
       videoIframe.style.display = "none";
       if (playButton) playButton.style.display = "flex";
-      closeButton.style.display = "none";
-
-      isVideoPlaying = false; // ✅ allow autoplay again
-      startAutoplay();
+      if (closeButton) closeButton.style.display = "none";
+      isVideoPlayingVertical = false;
+      startAutoplayVertical();
     };
-    closeButton.onclick = null;
-    closeButton.onclick = closeListener;
   }
 }
 
-// Function to update the displayed video and its content
-function updateVideoDisplay() {
-  if (currentVideoIndex >= 0 && currentVideoIndex < allVideoArray.length) {
-    allVideoArray.forEach((child) => {
-      child.style.display = "none";
-    });
+function updateVideoDisplayVertical() {
+  allVideoArrayVertical.forEach((child, idx) => {
+    child.style.display = idx === currentVideoIndexVertical ? "block" : "none";
+  });
 
-    allVideoArray[currentVideoIndex].style.display = "block";
-
-    resetAndTriggerAnimations();
-    attachPlayButtonListener();
-  } else {
-    console.error("Invalid video index:", currentVideoIndex);
-  }
+  const currentSlide = allVideoArrayVertical[currentVideoIndexVertical];
+  resetAndTriggerAnimationsVertical(currentSlide);
+  attachPlayButtonListenerVertical(currentSlide);
 }
 
-// Function to start the autoplay
-function startAutoplay() {
-  if (isVideoPlaying) return; // ✅ don’t autoplay while video plays
-  if (autoplayInterval) {
-    clearInterval(autoplayInterval);
-  }
-  autoplayInterval = setInterval(() => {
-    triggerExitAnimations();
+function startAutoplayVertical() {
+  if (isVideoPlayingVertical) return;
+  clearInterval(autoplayIntervalVertical);
+
+  autoplayIntervalVertical = setInterval(() => {
+    const currentSlide = allVideoArrayVertical[currentVideoIndexVertical];
+    triggerExitAnimationsVertical(currentSlide);
+
     setTimeout(() => {
-      currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-      updateVideoDisplay();
-    }, 600);
+      currentVideoIndexVertical =
+        (currentVideoIndexVertical + 1) % allVideoArrayVertical.length;
+      updateVideoDisplayVertical();
+    }, 200);
   }, 5000);
 }
 
-// Event listener for the "next" buttons
-videoNextButtons.forEach((button) => {
+videoNextButtonsVertical.forEach((button) => {
   button.addEventListener("click", () => {
-    if (isVideoPlaying) return; // ✅ ignore if video is playing
-    startAutoplay();
-    currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-    updateVideoDisplay();
-    //     triggerExitAnimations();
-    //     setTimeout(() => {
-    //       currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-    //       updateVideoDisplay();
-    //     },
-    //     600
-    // );
+    if (isVideoPlayingVertical) return;
+    const currentSlide = allVideoArrayVertical[currentVideoIndexVertical];
+    triggerExitAnimationsVertical(currentSlide);
+    clearInterval(autoplayIntervalVertical);
+    setTimeout(() => {
+      currentVideoIndexVertical =
+        (currentVideoIndexVertical + 1) % allVideoArrayVertical.length;
+      updateVideoDisplayVertical();
+    }, 200);
   });
 });
 
-// Event listener for the "previous" buttons
-videoPrevButtons.forEach((button) => {
+videoPrevButtonsVertical.forEach((button) => {
   button.addEventListener("click", () => {
-    if (isVideoPlaying) return; // ✅ ignore if video is playing
-    startAutoplay();
-    // triggerExitAnimations();
-    currentVideoIndex =
-      (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
-    updateVideoDisplay();
-    // setTimeout(
-    //   () => {
-    //     // currentVideoIndex =
-    //     //   (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
-    //     // updateVideoDisplay();
-    //   }
-    //   // 600
-    // );
+    if (isVideoPlayingVertical) return;
+    const currentSlide = allVideoArrayVertical[currentVideoIndexVertical];
+    triggerExitAnimationsVertical(currentSlide);
+    clearInterval(autoplayIntervalVertical);
+    setTimeout(() => {
+      currentVideoIndexVertical =
+        (currentVideoIndexVertical - 1 + allVideoArrayVertical.length) %
+        allVideoArrayVertical.length;
+      updateVideoDisplayVertical();
+    }, 200);
   });
 });
 
-// Stop autoplay when hovering
-allVideoTestimonial.addEventListener("mouseenter", () => {
-  clearInterval(autoplayInterval);
+allVideoTestimonialVertical.addEventListener("mouseenter", () =>
+  clearInterval(autoplayIntervalVertical)
+);
+allVideoTestimonialVertical.addEventListener("mouseleave", () => {
+  if (!isVideoPlayingVertical) startAutoplayVertical();
 });
 
-// Restart autoplay when mouse leaves (only if no video is playing)
-allVideoTestimonial.addEventListener("mouseleave", () => {
-  if (!isVideoPlaying) startAutoplay();
-});
-
-// Initial setup
-updateVideoDisplay();
-startAutoplay();
+// Init Vertical
+updateVideoDisplayVertical();
+startAutoplayVertical();
