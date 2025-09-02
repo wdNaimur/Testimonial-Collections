@@ -7,118 +7,123 @@ const videoNextButtons = document.querySelectorAll(
 const videoPrevButtons = document.querySelectorAll(".video-swiper-left-button");
 const allVideoArray = [...allVideoTestimonial.children];
 
-const quoteEl = document.querySelector(".video-swiper-testimonial-quote");
-const authorBoxEl = document.querySelector(".video-swiper-author-box");
-const topSection = document.querySelector(".video-swiper-testimonial-top");
-
 let currentVideoIndex = 0;
 let autoplayInterval;
-let isVideoPlaying = false; // ✅ New flag
+let isVideoPlaying = false;
 
-// Function to reset and trigger entry animations
-function resetAndTriggerAnimations() {
+// ----------------------
+// Animation Functions
+// ----------------------
+function resetAndTriggerAnimations(currentSlide) {
+  const quoteEl = currentSlide.querySelector(".video-swiper-testimonial-quote");
+  const authorBoxEl = currentSlide.querySelector(".video-swiper-author-box");
+  const topSection = currentSlide.querySelector(
+    ".video-swiper-testimonial-top"
+  );
+
   quoteEl.classList.remove("fade-out-slide-up");
-  authorBoxEl.classList.remove("fade-out-slide-up-slow");
-  topSection.classList.remove("zoom-out");
-
-  void quoteEl.offsetWidth;
-  void authorBoxEl.offsetWidth;
-  void topSection.offsetWidth;
-
+  void quoteEl.offsetWidth; // restart animation
   quoteEl.classList.add("fade-in-slide-up");
+
+  authorBoxEl.classList.remove("fade-out-slide-up-slow");
+  void authorBoxEl.offsetWidth;
   authorBoxEl.classList.add("fade-in-slide-up-slow");
+
+  topSection.classList.remove("zoom-out");
+  void topSection.offsetWidth;
   topSection.classList.add("zoom-in");
 }
 
-// Function to trigger exit animations
-function triggerExitAnimations() {
-  quoteEl.classList.remove("fade-in-slide-up");
-  authorBoxEl.classList.remove("fade-in-slide-up-slow");
+function triggerExitAnimations(currentSlide) {
+  const quoteEl = currentSlide.querySelector(".video-swiper-testimonial-quote");
+  const authorBoxEl = currentSlide.querySelector(".video-swiper-author-box");
+  const topSection = currentSlide.querySelector(
+    ".video-swiper-testimonial-top"
+  );
 
+  quoteEl.classList.remove("fade-in-slide-up");
   quoteEl.classList.add("fade-out-slide-up");
+
+  authorBoxEl.classList.remove("fade-in-slide-up-slow");
   authorBoxEl.classList.add("fade-out-slide-up-slow");
+
+  topSection.classList.remove("zoom-in");
+  topSection.classList.add("zoom-out");
 }
 
-// New function to handle the play button and close button logic for the active slide
-function attachPlayButtonListener() {
-  const currentSlide = allVideoArray[currentVideoIndex];
+// ----------------------
+// Play / Close Video
+// ----------------------
+function attachPlayButtonListener(currentSlide) {
   const playButton = currentSlide.querySelector(".swiper-play-button");
   const closeButton = currentSlide.querySelector(".swiper-close-button");
   const videoIframe = currentSlide.querySelector(
     ".video-swiper-testimonial-video"
   );
 
-  // Reset all video iframes
-  allVideoArray.forEach((slide) => {
-    const iframe = slide.querySelector(".video-swiper-testimonial-video");
-    const playBtn = slide.querySelector(".swiper-play-button");
-    const closeBtn = slide.querySelector(".swiper-close-button");
+  // Reset previous video
+  allVideoArray.forEach((slide, idx) => {
+    if (idx !== currentVideoIndex) {
+      const iframe = slide.querySelector(".video-swiper-testimonial-video");
+      const playBtn = slide.querySelector(".swiper-play-button");
+      const closeBtn = slide.querySelector(".swiper-close-button");
 
-    iframe.src = iframe.src.replace("&autoplay=1", "");
-    iframe.style.display = "none";
-    playBtn.style.display = "flex";
-    if (closeBtn) {
-      closeBtn.style.display = "none";
+      iframe.src = iframe.src.replace("&autoplay=1", "");
+      iframe.style.display = "none";
+      playBtn.style.display = "flex";
+      if (closeBtn) closeBtn.style.display = "none";
     }
   });
 
-  // Play button listener
+  // Play
   if (playButton && videoIframe) {
-    const playListener = () => {
+    playButton.onclick = () => {
       clearInterval(autoplayInterval);
-      isVideoPlaying = true; // ✅ stop autoplay when video plays
+      isVideoPlaying = true;
       videoIframe.style.display = "block";
       videoIframe.src += "&autoplay=1";
       playButton.style.display = "none";
-      if (closeButton) {
-        closeButton.style.display = "flex";
-      }
+      if (closeButton) closeButton.style.display = "flex";
     };
-    playButton.onclick = null;
-    playButton.onclick = playListener;
   }
 
-  // Close button listener
+  // Close
   if (closeButton && videoIframe) {
-    const closeListener = () => {
-      const videoSrc = videoIframe.src;
-      videoIframe.src = videoSrc.replace("&autoplay=1", "");
+    closeButton.onclick = () => {
+      videoIframe.src = videoIframe.src.replace("&autoplay=1", "");
       videoIframe.style.display = "none";
       if (playButton) playButton.style.display = "flex";
-      closeButton.style.display = "none";
-
-      isVideoPlaying = false; // ✅ allow autoplay again
+      if (closeButton) closeButton.style.display = "none";
+      isVideoPlaying = false;
       startAutoplay();
     };
-    closeButton.onclick = null;
-    closeButton.onclick = closeListener;
   }
 }
 
-// Function to update the displayed video and its content
+// ----------------------
+// Update Display
+// ----------------------
 function updateVideoDisplay() {
-  if (currentVideoIndex >= 0 && currentVideoIndex < allVideoArray.length) {
-    allVideoArray.forEach((child) => {
-      child.style.display = "none";
-    });
+  allVideoArray.forEach((child, idx) => {
+    child.style.display = idx === currentVideoIndex ? "block" : "none";
+  });
 
-    allVideoArray[currentVideoIndex].style.display = "block";
-
-    resetAndTriggerAnimations();
-    attachPlayButtonListener();
-  } else {
-    console.error("Invalid video index:", currentVideoIndex);
-  }
+  const currentSlide = allVideoArray[currentVideoIndex];
+  resetAndTriggerAnimations(currentSlide);
+  attachPlayButtonListener(currentSlide);
 }
 
-// Function to start the autoplay
+// ----------------------
+// Autoplay
+// ----------------------
 function startAutoplay() {
-  if (isVideoPlaying) return; // ✅ don’t autoplay while video plays
-  if (autoplayInterval) {
-    clearInterval(autoplayInterval);
-  }
+  if (isVideoPlaying) return;
+  clearInterval(autoplayInterval);
+
   autoplayInterval = setInterval(() => {
-    triggerExitAnimations();
+    const currentSlide = allVideoArray[currentVideoIndex];
+    triggerExitAnimations(currentSlide);
+
     setTimeout(() => {
       currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
       updateVideoDisplay();
@@ -126,53 +131,46 @@ function startAutoplay() {
   }, 5000);
 }
 
-// Event listener for the "next" buttons
+// ----------------------
+// Navigation
+// ----------------------
 videoNextButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (isVideoPlaying) return; // ✅ ignore if video is playing
-    startAutoplay();
-    currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-    updateVideoDisplay();
-    //     triggerExitAnimations();
-    //     setTimeout(() => {
-    //       currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
-    //       updateVideoDisplay();
-    //     },
-    //     600
-    // );
+    if (isVideoPlaying) return;
+    const currentSlide = allVideoArray[currentVideoIndex];
+    triggerExitAnimations(currentSlide);
+    setTimeout(() => {
+      currentVideoIndex = (currentVideoIndex + 1) % allVideoArray.length;
+      updateVideoDisplay();
+    }, 600);
   });
 });
 
-// Event listener for the "previous" buttons
 videoPrevButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (isVideoPlaying) return; // ✅ ignore if video is playing
-    startAutoplay();
-    // triggerExitAnimations();
-    currentVideoIndex =
-      (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
-    updateVideoDisplay();
-    // setTimeout(
-    //   () => {
-    //     // currentVideoIndex =
-    //     //   (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
-    //     // updateVideoDisplay();
-    //   }
-    //   // 600
-    // );
+    if (isVideoPlaying) return;
+    const currentSlide = allVideoArray[currentVideoIndex];
+    triggerExitAnimations(currentSlide);
+    setTimeout(() => {
+      currentVideoIndex =
+        (currentVideoIndex - 1 + allVideoArray.length) % allVideoArray.length;
+      updateVideoDisplay();
+    }, 600);
   });
 });
 
-// Stop autoplay when hovering
-allVideoTestimonial.addEventListener("mouseenter", () => {
-  clearInterval(autoplayInterval);
-});
-
-// Restart autoplay when mouse leaves (only if no video is playing)
+// ----------------------
+// Pause on hover
+// ----------------------
+allVideoTestimonial.addEventListener("mouseenter", () =>
+  clearInterval(autoplayInterval)
+);
 allVideoTestimonial.addEventListener("mouseleave", () => {
   if (!isVideoPlaying) startAutoplay();
 });
 
-// Initial setup
+// ----------------------
+// Init
+// ----------------------
 updateVideoDisplay();
 startAutoplay();

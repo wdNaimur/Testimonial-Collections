@@ -1,3 +1,6 @@
+.all-video-swiper-container {
+  position: relative;
+}
 .video-swiper-testimonial {
   position: relative;
   width: 100%;
@@ -9,7 +12,6 @@
   gap: 60px;
 }
 .video-swiper-testimonial-container {
-  height: 650px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -21,7 +23,7 @@
   transform: translateX(-50%);
   width: calc(100vw - 100px);
   height: 100%;
-  display: block;
+  display: none; /* hidden by default */
   z-index: 100;
 }
 .video-swiper-testimonial-top {
@@ -33,6 +35,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.video-swiper-navigation-button {
+  position: absolute;
+  width: calc(50% - 30px);
+  bottom: 300px;
+  left: 0%;
+  /* transform: translateX(50%); */
 }
 
 .video-swiper-background-1 {
@@ -56,36 +66,34 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  z-index: 110; /* Make sure it's above the video */
+  z-index: 110;
   background: rgba(0, 0, 0, 0.5);
   border: none;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  display: flex;
+  display: none; /* hidden by default */
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   color: white;
 }
-
 .swiper-close-button:hover {
   background: rgba(0, 0, 0, 0.7);
   transform: scale(1.1);
 }
-
 .swiper-close-button svg {
   width: 24px;
   height: 24px;
 }
-
 .video-swiper-image {
   position: relative;
   z-index: 3;
 }
 .video-swiper-testimonial-bottom {
   padding: 30px;
+  height: 300px;
 }
 .video-swiper-testimonial-quote {
   font-size: 24px;
@@ -115,11 +123,11 @@
   backdrop-filter: blur(5px);
   border-radius: 999px;
   transition: transform 0.3s ease;
+  display: flex;
 }
 .swiper-play-button:hover {
   transform: scale(1.06);
 }
-
 .video-swiper-left-button,
 .video-swiper-right-button {
   position: absolute;
@@ -133,7 +141,6 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .video-swiper-right-button {
   right: 0;
   transform: translateX(50%);
@@ -142,7 +149,11 @@
 }
 .video-swiper-left-button:hover,
 .video-swiper-right-button:hover {
-  scale: 1.1;
+  scale: 1.2;
+}
+.video-swiper-left-button:active,
+.video-swiper-right-button:active {
+  scale: 1;
 }
 .video-swiper-left-button {
   left: 0;
@@ -162,19 +173,10 @@
   display: flex;
   gap: 20px;
 }
-
 .video-swiper-logo {
   height: 80px;
   width: 80px;
   object-fit: contain;
-}
-/* animations  */
-/* Entry Animations */
-.fade-in-slide-up {
-  animation: fadeInSlideUp 0.5s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
-}
-.fade-in-slide-up-slow {
-  animation: fadeInSlideUp 1s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 .video-swiper-testimonial-right-heading {
   font-size: 45px;
@@ -185,6 +187,13 @@
   color: #007bfc;
 }
 
+/* Entry Animations */
+.fade-in-slide-up {
+  animation: fadeInSlideUp 0.5s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
+}
+.fade-in-slide-up-slow {
+  animation: fadeInSlideUp 1s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
+}
 @keyframes fadeInSlideUp {
   0% {
     opacity: 0;
@@ -196,18 +205,21 @@
   }
 }
 
-/* Exit Animations */
-.fade-out-slide-Down {
-  animation: fadeOutSlideDown 0.6s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
+/* Exit Animations (fixed: no display: none inside animation) */
+.fade-out-slide-up {
+  animation: fadeOutSlideUp 0.6s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
-@keyframes fadeOutSlideDown {
+.fade-out-slide-up-slow {
+  animation: fadeOutSlideUp 0.9s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
+}
+@keyframes fadeOutSlideUp {
   0% {
     opacity: 1;
     transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-20px);
   }
 }
 
@@ -222,17 +234,16 @@
     background-size: 105%;
   }
 }
-
 .zoom-out {
-  animation: zoomOut 0.6s ease-in forwards;
+  animation: zoomOut 0.5s cubic-bezier(0.44, -0.01, 0.5, 1.23) forwards;
 }
 @keyframes zoomOut {
   from {
-    transform: scale(1);
+    background-size: 100%;
     opacity: 1;
   }
   to {
-    transform: scale(0.8);
+    background-size: 115%;
     opacity: 0;
   }
 }
