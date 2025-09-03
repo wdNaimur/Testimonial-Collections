@@ -192,6 +192,17 @@
     transform: translateY(0);
   }
 }
+@media (max-width: 768px) {
+  .horizontal-video-swiper-left-button {
+    transform: translateY(0);
+  }
+  .horizontal-video-swiper-right-button {
+    transform: translateY(0);
+  }
+  .horizontal-video-swiper-navigation-button {
+    transform: translateY(-50px);
+  }
+}
 
 @media (max-width: 640px) {
   .horizontal-video-swiper-testimonial-section {
@@ -204,6 +215,7 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
+    transform: translateY(0);
   }
 
   .horizontal-video-swiper-left-button:hover,
