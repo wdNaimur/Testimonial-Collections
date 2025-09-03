@@ -1,0 +1,140 @@
+/* ===================== Section Styles ===================== */
+.cards-infinity-up-infinity-down-testimonial {
+  background-color: #e4e4e4;
+  margin: 50px 0;
+}
+
+.cards-infinity-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  align-items: center;
+}
+
+.cards-infinity-textbox {
+  padding: 40px 0;
+}
+
+.cards-infinity-sub-heading {
+  color: #f09083;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cards-infinity-heading {
+  color: #333333;
+  font-size: 38px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cards-infinity-paragraph {
+  color: #333333;
+}
+
+/* ===================== Cards Box ===================== */
+.cards-infinity-cards-box {
+  display: flex;
+  gap: 20px;
+  height: 800px;
+}
+
+/* -------- Left Column (Scroll Up) -------- */
+.cards-infinity-left-cards-box,
+.cards-infinity-right-cards-box {
+  height: 800px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+/* Pause animation on hover for left column */
+.cards-infinity-left-cards-box:hover .cards-infinity-content {
+  animation-play-state: paused;
+}
+
+/* Pause animation on hover for right column */
+.cards-infinity-right-cards-box:hover .cards-infinity-content {
+  animation-play-state: paused;
+}
+
+/* Scrollable content wrapper */
+.cards-infinity-left-cards-box .cards-infinity-content {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-up 15s linear infinite;
+}
+
+.cards-infinity-right-cards-box .cards-infinity-content {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-down 15s linear infinite;
+}
+
+/* ===================== Card Styles ===================== */
+.scroll-card-bottom-testimonial-box {
+  background-color: #fff;
+  color: #112631;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 14px;
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
+  cursor: default;
+  transition: background-color 0.3s cubic-bezier(1, 0, 0, 1);
+}
+
+.scroll-card-bottom-testimonial-text {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.scroll-card-bottom-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-card-bottom-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid #3ea5b1;
+}
+
+.scroll-card-bottom-name p {
+  font-weight: 600;
+  margin: 0;
+}
+.scroll-card-bottom-username {
+  text-decoration: none;
+  color: #112631;
+  opacity: 0.6;
+}
+
+.scroll-card-bottom-testimonial-box:hover {
+  background-color: #112631;
+  color: #fff;
+}
+.scroll-card-bottom-testimonial-box:hover .scroll-card-bottom-username {
+  color: #fff;
+}
+
+/* ===================== Animations ===================== */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
