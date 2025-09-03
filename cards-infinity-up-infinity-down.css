@@ -26,6 +26,8 @@
   font-size: 38px;
   font-weight: 600;
   text-transform: uppercase;
+  margin-bottom: 20px;
+  line-height: 45px;
 }
 
 .cards-infinity-paragraph {
@@ -136,5 +138,43 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 1280px) {
+  .cards-infinity-heading {
+    color: #333333;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    line-height: 36px;
+  }
+}
+@media (max-width: 1024px) {
+  .cards-infinity-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 35px;
+  }
+
+  .cards-infinity-textbox {
+    padding: 40px 0 0 0;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .cards-infinity-cards-box {
+    padding: 0 10px;
+  }
+}
+@media (max-width: 640px) {
+  .cards-infinity-cards-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 1600px;
+    /* height: 800px; */
   }
 }
