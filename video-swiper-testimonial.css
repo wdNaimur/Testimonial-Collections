@@ -19,11 +19,12 @@
 }
 .video-swiper-testimonial-video {
   position: fixed;
-  top: 0;
+  border-radius: 16px;
+  top: 5vh;
   left: 0;
   right: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 90vh;
   aspect-ratio: 16/9;
   object-fit: contain;
   display: none;
